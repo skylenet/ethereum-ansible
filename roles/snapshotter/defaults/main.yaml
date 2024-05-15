@@ -10,7 +10,7 @@ snapshotter_container_restart_policy: always
 snapshotter_container_networks: []
 snapshotter_container_volumes_from: []
 snapshotter_container_volumes:
-  - "{{ snapshotter_datadir }}/config.yaml:/etc/snapshotter/config.yaml:ro"
+  - "{{ snapshotter_datadir }}/:/etc/snapshotter:ro"
   - "/var/run/docker.sock:/var/run/docker.sock:ro"
 snapshotter_container_env: {}
 snapshotter_container_command:
@@ -35,13 +35,12 @@ snapshotter_config: |
     chainID: "0x4268" # Holesky
     ssh:
       private_key_path: /etc/snapshotter/.ssh/id_rsa
-      private_key_passphrase_path: "/etc/snapshotter/.ssh/id_rsa.passphrase"
       known_hosts_path: /etc/snapshotter/.ssh/known_hosts
       ignore_host_key: false
       use_agent: false
     snapshots:
       check_interval_seconds: 1
-      block_interval: 100000
+      block_interval: 10000
       run_once: false
       rclone:
         version: "1.65.2"
